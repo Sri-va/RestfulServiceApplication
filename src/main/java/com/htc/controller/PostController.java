@@ -16,26 +16,30 @@ import org.springframework.web.bind.annotation.RestController;
 import com.htc.dao.PostRepository;
 import com.htc.model.MyUsers;
 import com.htc.model.Post;
+import com.htc.services.PostService;
 
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
 	
 	@Autowired
-	PostRepository postRepository;
+	PostService postservice;
 	
 
 	@PostMapping("/addpost")
-	public Post AddUser(@RequestBody Post post) {
+	public ResponseEntity<String> addPost(@RequestBody Post post) {
 		
-		return postRepository.save(post);
+		if(postservice.save(post))
+			return new ResponseEntity<String>("User Added Successfully", HttpStatus.ACCEPTED);
+		 
+		 return new ResponseEntity<String>("Fatal error. Post could not be added. Try again !!!", HttpStatus.BAD_REQUEST);
 		
 	} 
 	
 	@GetMapping("/getallposts/{userid}")
 	public Set<Post> getAllPostsByUserID(@PathVariable(value="userid") int id){
 		
-		return postRepository.findAllByUserId(id);
+		return postservice.getAllPostsByUserID(id);
 		
 	}
 

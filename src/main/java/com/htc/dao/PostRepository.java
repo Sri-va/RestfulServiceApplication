@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.htc.model.Post;
 import com.htc.model.MyUsers;
 
-
+@Transactional
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
 	

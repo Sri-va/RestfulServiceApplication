@@ -47,7 +47,7 @@ public class Topic {
 	public Set<Post> posts;
 	
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="user_id")
 	private MyUsers author;
 	
@@ -86,6 +86,14 @@ public class Topic {
 	}
 	public void setPosts(Set<Post> posts) {
 		this.posts = posts;
+	}
+	
+	
+	public MyUsers getAuthor() {
+		return author;
+	}
+	public void setAuthor(MyUsers author) {
+		this.author = author;
 	}
 	public Topic() {
 		
